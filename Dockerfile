@@ -65,6 +65,11 @@ COPY .docker/php-fpm.conf /etc/php81/php-fpm.conf
 COPY .docker/nginx.conf /etc/nginx/
 COPY .docker/nginx-laravel.conf /etc/nginx/http.d/default.conf
 
+# CONFIGURE NGINX TEMP PATH
+RUN mkdir /tmp/nginx
+RUN chown nobody:nobody -R /tmp/nginx
+RUN chmod 755 -R /tmp/nginx
+
 RUN mkdir -p /run/nginx/ && touch /run/nginx/nginx.pid
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
